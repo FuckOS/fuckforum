@@ -11,10 +11,13 @@ const main = async() => {
     headless: false,
     devtools: false
   });
-
+  console.log('start');
+  launchPage(await browser.newPage());
+  launchPage(await browser.newPage());
   launchPage(await browser.newPage());
   
 };
+console.log('start');
 
 const REGISTER_URL = 'https://flyosforum.huoyinetwork.cn/index.php?app=user&ac=register';
 const launchPage = async(page: puppeteer.Page) => {
@@ -26,10 +29,8 @@ const launchPage = async(page: puppeteer.Page) => {
     // console.log('proxy', proxy.data);
     // await pageProxy(page, proxy.data.https ? 'https://' : 'http://' +  proxy.data.proxt);
     page.goto(REGISTER_URL);
-    await sleep(8000);
-    const submit = await page.waitForSelector('#comm-submit', {
-      timeout: 999999999
-    });
+    await sleep(6000);
+    const submit = await page.waitForSelector('#comm-submit');
     const email = await page.waitForSelector('#comm-form > div:nth-child(1) > input'),
       password = await page.waitForSelector('#comm-form > div:nth-child(2) > input'),
       passwordAgain = await page.waitForSelector('#comm-form > div:nth-child(3) > input'),
