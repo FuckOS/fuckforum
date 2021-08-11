@@ -17,8 +17,6 @@ const main = async() => {
   launchPage(await browser.newPage());
   
 };
-console.log('start');
-
 const REGISTER_URL = 'https://flyosforum.huoyinetwork.cn/index.php?app=user&ac=register';
 const launchPage = async(page: puppeteer.Page) => {
   while(true) {
@@ -28,8 +26,9 @@ const launchPage = async(page: puppeteer.Page) => {
     // });
     // console.log('proxy', proxy.data);
     // await pageProxy(page, proxy.data.https ? 'https://' : 'http://' +  proxy.data.proxt);
-    page.goto(REGISTER_URL);
-    await sleep(6000);
+    console.log('goto register')
+    await page.goto(REGISTER_URL);
+    console.log('wait');
     const submit = await page.waitForSelector('#comm-submit');
     const email = await page.waitForSelector('#comm-form > div:nth-child(1) > input'),
       password = await page.waitForSelector('#comm-form > div:nth-child(2) > input'),
