@@ -1,0 +1,23 @@
+# This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Auto
+
+on:
+  schedule:
+    - cron: '0/25 * * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 16.x
+        cache: 'npm'
+    - run: yarn
+    - run: npx ts-node index.ts
