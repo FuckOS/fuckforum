@@ -26,8 +26,11 @@ const launchPage = async(page: puppeteer.Page) => {
     // console.log('proxy', proxy.data);
     // await pageProxy(page, proxy.data.https ? 'https://' : 'http://' +  proxy.data.proxt);
     page.goto(REGISTER_URL);
-    const submit = await page.waitForSelector('#comm-submit'),
-      email = await page.waitForSelector('#comm-form > div:nth-child(1) > input'),
+    await sleep(8000);
+    const submit = await page.waitForSelector('#comm-submit', {
+      timeout: 999999999
+    });
+    const email = await page.waitForSelector('#comm-form > div:nth-child(1) > input'),
       password = await page.waitForSelector('#comm-form > div:nth-child(2) > input'),
       passwordAgain = await page.waitForSelector('#comm-form > div:nth-child(3) > input'),
       username = await page.waitForSelector('#comm-form > div:nth-child(4) > input');
@@ -67,6 +70,7 @@ const launchPage = async(page: puppeteer.Page) => {
 
     await submit!.click();
     console.log('set image')
+    await sleep(8000);
     const picker = await page.waitForSelector('body > div:nth-child(4) > div > div.col-md-6 > div > div > form > div:nth-child(2) > div:nth-child(2) > input[type=file]');
     const picker_ok = await page.waitForSelector('body > div:nth-child(4) > div > div.col-md-6 > div > div > form > div:nth-child(3) > button');
     await picker!.uploadFile(path.resolve(__dirname, 'R.jpg'));
@@ -75,6 +79,7 @@ const launchPage = async(page: puppeteer.Page) => {
     await sleep(1000);
   
     await page.goto('https://flyosforum.huoyinetwork.cn/index.php?app=article&ac=add');
+    await sleep(8000);
     console.log('send art')
     const art_title = await page.waitForSelector('body > div:nth-child(5) > div > div > div > div.col-md-8 > form > div:nth-child(1) > input');
     const art_content = await page.waitForSelector('#tseditor');
@@ -99,6 +104,7 @@ const launchPage = async(page: puppeteer.Page) => {
     await sleep(1000);
 
     await page.goto('https://flyosforum.huoyinetwork.cn/index.php?app=weibo');
+    await sleep(8000);
     const wb_title = await page.waitForSelector('#title');
     const wb_submit = await page.waitForSelector('#comm-form > div.d-flex.justify-content-between.align-content-center.mt-2 > div:nth-child(2) > button');
 
@@ -118,7 +124,7 @@ const launchPage = async(page: puppeteer.Page) => {
     );  
     
 
-    await sleep(5000);
+    // await sleep(3000);
     
   }
 
