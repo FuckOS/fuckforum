@@ -13,8 +13,8 @@ const main = async() => {
   });
   console.log('start');
   launchPage(await browser.newPage());
-  launchPage(await browser.newPage());
-  launchPage(await browser.newPage());
+  // launchPage(await browser.newPage());
+  // launchPage(await browser.newPage());
   
 };
 const REGISTER_URL = 'https://flyosforum.huoyinetwork.cn/index.php?app=user&ac=register';
@@ -70,7 +70,7 @@ const launchPage = async(page: puppeteer.Page) => {
 
     await submit!.click();
     console.log('set image')
-    await sleep(8000);
+    await sleep(2000);
     const picker = await page.waitForSelector('body > div:nth-child(4) > div > div.col-md-6 > div > div > form > div:nth-child(2) > div:nth-child(2) > input[type=file]');
     const picker_ok = await page.waitForSelector('body > div:nth-child(4) > div > div.col-md-6 > div > div > form > div:nth-child(3) > button');
     await picker!.uploadFile(path.resolve(__dirname, 'R.jpg'));
@@ -124,7 +124,7 @@ const launchPage = async(page: puppeteer.Page) => {
     );  
     
 
-    // await sleep(3000);
+    await sleep(3000);
     
   }
 
