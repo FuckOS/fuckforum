@@ -10,7 +10,7 @@ async function BrowserMain(page: Page) {
   const start = Date.now();
   while (true) {
     try {
-      const username = randString.generate({ readable: true, length: 8 });
+      const username = randString.generate({ readable: true, length: 10 });
       const email = username + '@' + randString.generate({ readable: true, length: 12 }) + '.com';
       const password = randString.generate({
         readable: true,
@@ -22,7 +22,7 @@ async function BrowserMain(page: Page) {
       await page.goto(BASEURL + '/');
       await (await page.waitForSelector('#header-secondary > ul > li.item-signUp > button'))!.click()
       await page.waitForSelector('#modal > div > div > div > form > div.Modal-body > div.Form.Form--centered > div:nth-child(1) > input');
-      await sleep(150);
+      await sleep(250);
       await (await page.waitForSelector('#modal > div > div > div > form > div.Modal-body > div.Form.Form--centered > div:nth-child(1) > input'))?.focus();
       await page.type('#modal > div > div > div > form > div.Modal-body > div.Form.Form--centered > div:nth-child(1) > input', username, {delay:10});
       await sleep(150);
@@ -81,11 +81,11 @@ async function BrowserMain(page: Page) {
 
 (async() => {
   const browser = await puppeteer.launch({
-    headless: false
+    headless: true
   });
 
   BrowserMain(await browser.newPage());
-  // BrowserMain(await browser.newPage());
-  // BrowserMain(await browser.newPage());
+  BrowserMain(await browser.newPage());
+  BrowserMain(await browser.newPage());
   
 })();
