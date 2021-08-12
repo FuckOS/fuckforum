@@ -75,6 +75,9 @@ async function BrowserMain(page: Page) {
       await sleep(1500);
     } catch(err) {
       console.log('err', err);
+      await page.deleteCookie(
+        ...((await page.cookies()).map(({name}) => ({ name })))
+      );  
       continue;
     }
   }
