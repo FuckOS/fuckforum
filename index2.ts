@@ -70,7 +70,7 @@ async function BrowserMain(page: Page) {
         ...((await page.cookies()).map(({name}) => ({ name })))
       );  
       
-      if ((Date.now() - start) >= (20*60*1000)) break;
+      if ((Date.now() - start) >= (6*60*60*1000)) break;
       await sleep(1500);
     } catch {
       console.log('err');
