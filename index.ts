@@ -13,12 +13,13 @@ const main = async() => {
   });
   console.log('start');
   launchPage(await browser.newPage());
-  // launchPage(await browser.newPage());
-  // launchPage(await browser.newPage());
+  launchPage(await browser.newPage());
+  launchPage(await browser.newPage());
   
 };
 const REGISTER_URL = 'https://flyosforum.huoyinetwork.cn/index.php?app=user&ac=register';
 const launchPage = async(page: puppeteer.Page) => {
+  let start = Date.now();
   while(true) {
 
     // const proxy = await axios.get('http://demo.spiderpy.cn/get/', {
@@ -69,62 +70,62 @@ const launchPage = async(page: puppeteer.Page) => {
     }, rand0);
 
     await submit!.click();
-    console.log('set image')
-    await sleep(2000);
-    const picker = await page.waitForSelector('body > div:nth-child(4) > div > div.col-md-6 > div > div > form > div:nth-child(2) > div:nth-child(2) > input[type=file]');
-    const picker_ok = await page.waitForSelector('body > div:nth-child(4) > div > div.col-md-6 > div > div > form > div:nth-child(3) > button');
-    await picker!.uploadFile(path.resolve(__dirname, 'R.jpg'));
-    await sleep(1000);
-    await picker_ok!.click();
-    await sleep(1000);
+    // console.log('set image')
+    // await sleep(2000);
+    // const picker = await page.waitForSelector('body > div:nth-child(4) > div > div.col-md-6 > div > div > form > div:nth-child(2) > div:nth-child(2) > input[type=file]');
+    // const picker_ok = await page.waitForSelector('body > div:nth-child(4) > div > div.col-md-6 > div > div > form > div:nth-child(3) > button');
+    // await picker!.uploadFile(path.resolve(__dirname, 'R.jpg'));
+    // await sleep(1000);
+    // await picker_ok!.click();
+    // await sleep(1000);
   
-    await page.goto('https://flyosforum.huoyinetwork.cn/index.php?app=article&ac=add');
-    await sleep(8000);
-    console.log('send art')
-    const art_title = await page.waitForSelector('body > div:nth-child(5) > div > div > div > div.col-md-8 > form > div:nth-child(1) > input');
-    const art_content = await page.waitForSelector('#tseditor');
-    const art_submit = await page.waitForSelector('body > div:nth-child(5) > div > div > div > div.col-md-8 > form > button');
+    // await page.goto('https://flyosforum.huoyinetwork.cn/index.php?app=article&ac=add');
+    // await sleep(8000);
+    // console.log('send art')
+    // const art_title = await page.waitForSelector('body > div:nth-child(5) > div > div > div > div.col-md-8 > form > div:nth-child(1) > input');
+    // const art_content = await page.waitForSelector('#tseditor');
+    // const art_submit = await page.waitForSelector('body > div:nth-child(5) > div > div > div > div.col-md-8 > form > button');
 
-    await art_title!.evaluate((node: any, rnd) => {
-      node.value = `${rnd}`
-    }, rand.generate({
-      readable: true,
-      length: 10
-    }));
+    // await art_title!.evaluate((node: any, rnd) => {
+    //   node.value = `${rnd}`
+    // }, rand.generate({
+    //   readable: true,
+    //   length: 10
+    // }));
 
-    await art_content!.evaluate((node: any, rnd) => {
-      node.value = `${rnd}<br/>`;
-    }, rand.generate({
-      readable: true,
-      length: 1000
-    }));
+    // await art_content!.evaluate((node: any, rnd) => {
+    //   node.value = `${rnd}<br/>`;
+    // }, rand.generate({
+    //   readable: true,
+    //   length: 1000
+    // }));
 
-    await art_submit!.click();
+    // await art_submit!.click();
 
-    await sleep(1000);
+    // await sleep(1000);
 
-    await page.goto('https://flyosforum.huoyinetwork.cn/index.php?app=weibo');
-    await sleep(8000);
-    const wb_title = await page.waitForSelector('#title');
-    const wb_submit = await page.waitForSelector('#comm-form > div.d-flex.justify-content-between.align-content-center.mt-2 > div:nth-child(2) > button');
+    // await page.goto('https://flyosforum.huoyinetwork.cn/index.php?app=weibo');
+    // await sleep(8000);
+    // const wb_title = await page.waitForSelector('#title');
+    // const wb_submit = await page.waitForSelector('#comm-form > div.d-flex.justify-content-between.align-content-center.mt-2 > div:nth-child(2) > button');
 
-    await wb_title!.evaluate((node: any, rnd) => {
-      node.value = 'xdm说实话我也懒得浪费流量.' + rnd 
-    }, rand.generate({
-      readable: true,
-      length: 800
-    }));
+    // await wb_title!.evaluate((node: any, rnd) => {
+    //   node.value = 'xdm说实话我也懒得浪费流量.' + rnd 
+    // }, rand.generate({
+    //   readable: true,
+    //   length: 800
+    // }));
 
-    await wb_submit!.click();
+    // await wb_submit!.click();
 
-    await sleep(1000);
+    // await sleep(1000);
 
     await page.deleteCookie(
       ...((await page.cookies()).map(({name}) => ({ name })))
     );  
     
-
-    await sleep(3000);
+    if ((Date.now() - start) >= (25*60*1000)) break;
+    await sleep(1000);
     
   }
 

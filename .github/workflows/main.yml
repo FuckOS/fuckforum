@@ -4,8 +4,8 @@
 name: Auto
 
 on:
-  # schedule:
-  #   - cron: '0/25 * * * *'
+  schedule:
+    - cron: '0/25 * * * *'
   workflow_dispatch:
 
 jobs:
