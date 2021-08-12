@@ -84,8 +84,6 @@ async function BrowserMain(page: Page) {
     headless: true
   });
 
-  BrowserMain(await browser.newPage());
-  BrowserMain(await browser.newPage());
-  BrowserMain(await browser.newPage());
-  
+  await BrowserMain(await browser.newPage());
+
 })();
