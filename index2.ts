@@ -50,7 +50,8 @@ async function BrowserMain(page: Page) {
 
       console.log("set discu");
       await sleep(500);
-      await page.type('#composer > div > div.Composer-content > div > div.ComposerBody-content > ul > li.item-discussionTitle > h3 > input',randString.generate({
+      await page.type('#composer > div > div.Composer-content > div > div.ComposerBody-content > ul > li.item-discussionTitle > h3 > input',
+      'SBXXS垃圾玩意FLYOS,'+randString.generate({
         readable: true,
         length: 5
       }),{delay: 50});
@@ -72,8 +73,8 @@ async function BrowserMain(page: Page) {
       
       if ((Date.now() - start) >= (6*60*60*1000)) break;
       await sleep(1500);
-    } catch {
-      console.log('err');
+    } catch(err) {
+      console.log('err', err);
       continue;
     }
   }
@@ -81,7 +82,7 @@ async function BrowserMain(page: Page) {
 
 (async() => {
   const browser = await puppeteer.launch({
-    headless: true
+    headless: false
   });
 
   await BrowserMain(await browser.newPage());
